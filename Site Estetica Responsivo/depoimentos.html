@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>.carousel-depoimentos {
+        position: relative;
+        width: 80%; /* Ajuste o tamanho conforme necessário */
+        margin: auto;
+        overflow: hidden;
+      }
+      
+      .depoimento {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      
+      .depoimento.ativo {
+        opacity: 1;
+      }
+      
+      .depoimento img {
+        width: 100px; /* Ajuste o tamanho da imagem conforme necessário */
+        height: 100px; /* Ajuste o tamanho da imagem conforme necessário */
+        border-radius: 50%;
+        margin: 20px auto;
+      }
+      
+      .depoimento p {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      
+      .depoimento span {
+        font-size: 16px;
+        color: #666;
+      }
+      
+      .navegacao {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .anterior, .proximo {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      
+      .anterior:hover, .proximo:hover {
+        background-color: #555;
+      }
+      </style>
+      <script>
+        let depoimentos = document.querySelectorAll('.depoimento');
+let indice = 0;
+
+function mostrarDepoimento() {
+  depoimentos[indice].classList.add('ativo');
+  setTimeout(() => {
+    depoimentos[indice].classList.remove('ativo');
+    indice++;
+    if (indice >= depoimentos.length) {
+      indice = 0;
+    }
+    mostrarDepoimento();
+  }, 3000); // Tempo de exibição de cada depoimento em milissegundos
+}
+
+function anteriorDepoimento() {
+  depoimentos[indice].classList.remove('ativo');
+  indice--;
+  if (indice < 0) {
+    indice = depoimentos.length - 1;
+  }
+  depoimentos[indice].classList.add('ativo');
+}
+
+function proximoDepoimento() {
+  depoimentos[indice].classList.remove('ativo');
+  indice++;
+  if (indice >= depoimentos.length) {
+    indice = 0;
+  }
+  depoimentos[indice].classList.add('ativo');
+}
+
+mostrarDepoimento();
+      </script>
+    <h4>Depoimentos</h4>
+<div class="carousel-depoimentos">
+  <div class="depoimento">
+    <img src="Imgdep/imgedt.jpg" alt="Imagem do depoimento 1">
+    <p>"Este é um depoimento muito bom."</p>
+    <span>— Fulano de Tal</span>
+  </div>
+  <div class="depoimento">
+    <img src="imagem2.jpg" alt="Imagem do depoimento 2">
+    <p>"Outro depoimento incrível."</p>
+    <span>— Beltrano da Silva</span>
+  </div>
+  <div class="depoimento">
+    <img src="imagem3.jpg" alt="Imagem do depoimento 3">
+    <p>"Um depoimento mais incrível ainda."</p>
+    <span>— Cicrano de Souza</span>
+  </div>
+  <div class="navegacao">
+    <button class="anterior" onclick="anteriorDepoimento()">Anterior</button>
+    <button class="proximo" onclick="proximoDepoimento()">Próximo</button>
+  </div>
+</div>
